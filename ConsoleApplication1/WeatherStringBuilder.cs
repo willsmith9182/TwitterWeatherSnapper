@@ -8,5 +8,7 @@ namespace ConsoleApplication1
 {
     class WeatherStringBuilder
     {
+        StringBuilder sb = new StringBuilder();
+        
     }
 }
