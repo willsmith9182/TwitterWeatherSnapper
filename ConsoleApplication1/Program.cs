@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleApplication;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,37 +19,38 @@ namespace ConsoleApplication1
 
         static void Main(string[] args)
         {
+            StringBuilder sb = new StringBuilder();
             CredentialStrings cs = new CredentialStrings();
-            WeatherStringBuilder wsb = new WeatherStringBuilder();
-
+            Conditions c = new Conditions();
+        
             Console.WriteLine("Publishing to twitter...");
-
             Auth.SetUserCredentials(cs.ConsumerKey, cs.ConsumerSecret, cs.AccessToken, cs.AccessTokenSecret);
 
+            c.getCurrentConditions();
+            sb.Append("The current Temperature in Brighton is " + c.getAvgTemp() + ", the Windspeed is " +c.getWindSpeed()+ " and the Humidity is " +c.getHumidity());
             
-            m.buildString();
+            var  tweet = Tweet.PublishTweet("im at work breaking my own twitter lmao");
 
-            var  tweet = Tweet.PublishTweet(sb.ToString());
 
             if (tweet.IsTweetPublished)
             {
                 Console.WriteLine("Successful");
+                Console.WriteLine("Any key to Exit...");
+                Console.ReadLine();
             }
-                     
+            else
+            {
+                Console.WriteLine("Something went wrong...");
+                Console.WriteLine("Any key to Exit...");
+                Console.WriteLine(c.getAvgTemp() + c.getHumidity() + c.getWindSpeed());
+                Console.ReadLine();
+            }
 
-            Console.WriteLine("Any key to Exit...");
-            Console.ReadLine();
-
-        }
-
-
-        public void buildString()
-        {
 
         }
     }
 
-    class CredentialStrings
+    public class CredentialStrings
     {
         //properties in C#
         //hash these Twitter hashed strings with BCrypt (32) with my usual password - to make these hashes of hashes
