@@ -1,68 +1,86 @@
 ﻿using System;
 using System.Xml;
+using System.Text;
+using System.Net;
+using Newtonsoft.Json;
 
 namespace ConsoleApplication
 {
-    //http://www.dreamincode.net/forums/topic/153911-c%23using-google-weather-api-in-a-c%23-application/
+    //http://openweathermap.org/appid#use
 
+    //returns all conditions as weather
     public class Weather 
     {
 
-
     }
+
+    //conditions gets conditions
+    //returns Condition c
     public class Conditions
     {
+        public static string API_URL = "api.openweathermap.org/data/2.5/forecast/";
+        public static string API_BRIGHTON_ID = "city?id=3333133&";
+        public static  string API_KEY = "APPID=80863af25548b3d9c0ad735342ff0965";
+        public static string API_STRING = API_URL + API_BRIGHTON_ID + API_KEY;
+        
         public string AvgTemp = "";
         public string WindSpeed = "";
         public string Humidity = "";
 
-        public Conditions getCurrentConditions()
+        dynamic obj;
+
+
+        public Boolean makeRequest()
         {
-            Conditions c = new Conditions();
-
-            //potential error with the way im loading string if so -> .Load(string.Format())
-            XmlDocument xmlConditions = new XmlDocument();
-
             try
             {
-                xmlConditions.Load("http://www.google.com/ig/api?weather=bn1");
+                obj = JsonConvert.DeserializeObject(API_STRING);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 e.StackTrace.ToString();
             }
 
-            //looking for XML = "/xml_api_reply/weather/forecast_information/WHATEVER VARIABLE YOU NEED HERE"
-            if (xmlConditions.SelectSingleNode("xml_api_reply / weather / problem_cause") == null)
+            if (obj == null)
             {
-                //bomb out 
-                c = null;
+                return false;
             }
-            else
-            {
-                foreach (XmlNode node in xmlConditions.SelectNodes("/xml_api_reply/weather/forecast_conditions"))
-                {
-                    c.AvgTemp = xmlConditions.SelectSingleNode("/xml_api_reply/weather/forecast_information/temp_c").Attributes["data"].InnerText;
-                    c.WindSpeed = xmlConditions.SelectSingleNode("/xml_api_reply/weather/forecast_information/wind_conditions").Attributes["data"].InnerText;
-                    c.Humidity = xmlConditions.SelectSingleNode("/xml_api_reply/weather/forecast_information/humidity").Attributes["data"].InnerText;
-                }
-            }
-            return c;
+            testAPI();
+            return true;
+        }
+        
+
+        public void testAPI()
+        {
+            Console.WriteLine(obj.coord.lon + "  " + obj.coord.lat);
+            Console.ReadLine();
         }
 
-        public string getAvgTemp()
+        /**
+         * 
+         * These classes represent the weather object
+         * 
+         **/
+        public class Coord
         {
-            return this.AvgTemp;
+            public double lon { get; set; }
+            public double lat { get; set; }
         }
 
-        public string getWindSpeed()
+        public class Sys
         {
-            return this.WindSpeed;
+            public double message { get; set; }
+            public string country { get; set; }
+            public int sunrise { get; set; }
+            public int sunset { get; set; }
         }
 
-        public string getHumidity()
+        public class Weather
         {
-            return this.Humidity;
+            public int id { get; set; }
+            public string main { get; set; }
+            public string description { get; set; }
+            public string icon { get; set; }
         }
     }
 }

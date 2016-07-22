@@ -22,31 +22,32 @@ namespace ConsoleApplication1
             StringBuilder sb = new StringBuilder();
             CredentialStrings cs = new CredentialStrings();
             Conditions c = new Conditions();
-        
+            
             Console.WriteLine("Publishing to twitter...");
             Auth.SetUserCredentials(cs.ConsumerKey, cs.ConsumerSecret, cs.AccessToken, cs.AccessTokenSecret);
 
-            c.getCurrentConditions();
-            sb.Append("The current Temperature in Brighton is " + c.getAvgTemp() + ", the Windspeed is " +c.getWindSpeed()+ " and the Humidity is " +c.getHumidity());
-            
-            var  tweet = Tweet.PublishTweet("im at work breaking my own twitter lmao");
+            //c.getCurrentConditions();
+            //sb.Append("The current Temperature in Brighton is " + c.getAvgTemp() + ", the Windspeed is " +c.getWindSpeed()+ " and the Humidity is " +c.getHumidity());
 
+            c.makeRequest();
 
-            if (tweet.IsTweetPublished)
+            if (false)
             {
-                Console.WriteLine("Successful");
-                Console.WriteLine("Any key to Exit...");
-                Console.ReadLine();
-            }
-            else
-            {
-                Console.WriteLine("Something went wrong...");
-                Console.WriteLine("Any key to Exit...");
-                Console.WriteLine(c.getAvgTemp() + c.getHumidity() + c.getWindSpeed());
-                Console.ReadLine();
-            }
+                var tweet = Tweet.PublishTweet(c/);
 
-
+                if (tweet.IsTweetPublished)
+                {
+                    Console.WriteLine("Successful");
+                    Console.WriteLine("Any key to Exit...");
+                    Console.ReadLine();
+                }
+                else
+                {
+                    Console.WriteLine("Something went wrong...");
+                    Console.WriteLine("Any key to Exit...");
+                    Console.ReadLine();
+                }
+            }
         }
     }
 
