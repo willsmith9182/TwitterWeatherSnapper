@@ -33,7 +33,7 @@ namespace ConsoleApplication1
 
             if (false)
             {
-                var tweet = Tweet.PublishTweet(c/);
+                var tweet = Tweet.PublishTweet(c);
 
                 if (tweet.IsTweetPublished)
                 {
