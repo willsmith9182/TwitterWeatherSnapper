@@ -2,3 +2,4 @@
 **/obj
 **.suo
 .paket/paket.exe
+packages/*
