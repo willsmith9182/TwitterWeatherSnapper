@@ -1,0 +1,11 @@
+source https://www.nuget.org/api/v2
+
+nuget NuGet.CommandLine
+nuget Autofac 3.5.2 framework: >= net452
+nuget Forecast.io 1.0.9 framework: >= net452
+nuget Microsoft.Bcl 1.1.10 framework: >= net452
+nuget Microsoft.Bcl.Async 1.0.168 framework: >= net452
+nuget Microsoft.Bcl.Build 1.0.21 framework: >= net452
+nuget Microsoft.Net.Http 2.2.29 framework: >= net452
+nuget Newtonsoft.Json 9.0.1 framework: >= net452
+nuget TweetinviAPI 1.0 framework: >= net452

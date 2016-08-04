@@ -1,0 +1,20 @@
+NUGET
+  remote: https://www.nuget.org/api/v2
+    Autofac (3.5.2) - framework: >= net452
+    Forecast.io (1.0.9) - framework: >= net452
+    Microsoft.Bcl (1.1.10) - framework: >= net452
+      Microsoft.Bcl.Build (>= 1.0.14)
+    Microsoft.Bcl.Async (1.0.168) - framework: >= net452
+      Microsoft.Bcl (>= 1.1.8)
+    Microsoft.Bcl.Build (1.0.21) - import_targets: false, framework: >= net452
+    Microsoft.Net.Http (2.2.29) - framework: >= net452
+      Microsoft.Bcl (>= 1.1.10)
+      Microsoft.Bcl.Build (>= 1.0.14)
+    Newtonsoft.Json (9.0.1) - framework: >= net452
+    NuGet.CommandLine (3.4.3)
+    TweetinviAPI (1.0) - framework: >= net452
+      Autofac (>= 3.5.2)
+      Microsoft.Bcl.Async (>= 1.0.168)
+      Microsoft.Bcl.Build (>= 1.0.21)
+      Microsoft.Net.Http (>= 2.2.29)
+      Newtonsoft.Json (>= 9.0.1)
